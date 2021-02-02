@@ -10,6 +10,7 @@ from numpy.lib import recfunctions as rfn
 
 from .backend import DataBackend
 from ..utils import get_date_from_int, get_int_date
+from rqalpha.data.bar_dict_price_board import BarDictPriceBoard
 
 
 class RQAlphaDataBackend(DataBackend):
@@ -34,7 +35,7 @@ class RQAlphaDataBackend(DataBackend):
         from rqalpha.data.base_data_source import BaseDataSource
         from rqalpha.data.data_proxy import DataProxy
 
-        self.data_proxy = DataProxy(BaseDataSource(os.path.expanduser(bundle_path)))
+        self.data_proxy = DataProxy(BaseDataSource(os.path.expanduser(bundle_path), None), BarDictPriceBoard())
 
     def get_price(self, order_book_id, start, end, freq, **kwargs):
         """
